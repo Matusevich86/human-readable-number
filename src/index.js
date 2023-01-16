@@ -1,7 +1,7 @@
 module.exports = function toReadable (number) {
   const units = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
   const firstDozen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-  const dozens = ['twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+  const dozens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
   const hundreds = ['hundred'];
 
   let num = String(number).split('');
@@ -19,17 +19,16 @@ module.exports = function toReadable (number) {
         }
       }
   } else if (num.length === 3) {
-        if (num[1] && num[2] === '0') {
+        if (num[1] === '0' && num[2] === '0') {
             return units[num[0]] + ' ' + hundreds[0];
         } else if (num[1] === '0') {
             return units[num[0]] + ' ' + hundreds[0] + ' ' + units[num[2]];
         } else if (num[1] === '1')  {
-            return units[num[0]] + ' ' + hundreds[0] + ' ' +  firstDozen[num[1]];
+            return units[num[0]] + ' ' + hundreds[0] + ' ' +  firstDozen[num[2]];
         } else if (num[1] > '1' && num[2] === '0') {
             return units[num[0]] + ' ' + hundreds[0] + ' ' +  dozens[num[1]];
         } else if (num[1] > '1' && num[2] > '0') {
             return units[num[0]] + ' ' + hundreds[0] + ' ' +  dozens[num[1]] + ' ' + units[num[2]];
         }
   }
-
 }
